@@ -9,7 +9,7 @@ const SignIn = () => {
   return (
     <Layout>
       <S.Header>
-        <S.Title>Review Service<br />For Books</S.Title>
+        <S.Title>Review Service <br />For Books</S.Title>
         <S.SubText>Please Share Your Opinion On Web Development Books.</S.SubText>
         <S.MainImg src="/images/readingpeople.png" alt="홈페이지 로고"/>
       </S.Header>

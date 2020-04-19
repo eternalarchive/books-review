@@ -4,10 +4,11 @@ import styled from 'styled-components';
 const StyledButton = styled.button`
   width: 200px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px 25px;
   border: 2px solid #002D93;
+  color: ${props => (props.colorType === 'white' ? '#002D93' : '#fff')};
   background-color: ${props => (props.colorType === 'white' ? '#fff' : '#002D93')};
   font-size: 1.8rem;
   line-height: 1.5;
@@ -28,7 +29,7 @@ const StyledArrow = styled.span`
   background-image: url('/images/arrow.png');
   background-size: 40px;
   background-repeat: no-repeat;
-  background-position-x: 100%;
+  background-position-x: ${props => (props.colorType === 'white' ? '100%' : '0%')};
 `;
 
 const Button = ({ colorType, children }) => {

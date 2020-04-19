@@ -1,118 +1,120 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import Layout from '../components/Layout';
+import AddBookPopup from '../components/AddBookPopup';
 import * as S from '../components/homeStyle';
 // import { Redirect } from 'react-router-dom';
 // import useToken from '../hooks/useToken';
 
-const SiginInfo = styled.span`
-
-`;
-
-const SignoutButton = styled.button`
-  border: 0;
-  margin-left: 10px;
-  :hover {
-    text-decoration: underline;
-  }
-`;
-
-const HomeNav = styled.nav`
-  position: absolute;
-  right: 0;
-  top: 20px;
-  color: #313131;
-  font-weight: 400;
-  text-align: right;
-`;
-
-const SigninInfoBox = styled.div`
-
-`;
-
-const AddButton = styled.button`
-  border: 0;
-  width: 8rem;
-  height: 8rem;
-  background-color: #EAEAEA;
-  margin-top: 20px;
-`;
-
-const PlusIcon = styled.img`
-  width: 4rem;
-
-`;
-
-const BookListMain = styled.main`
-  padding: 50px 0;
-`;
-
-const BookListUl = styled.ul`
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-`;
-
-const BookInfo = styled.li`
-  padding: 10px;
-  background-color: #002D93;
-  width: 25rem;
-  height: 19rem;
-  color: #fff;
-  :hover {
-    background-color: #60B198;
-  }
-  :nth-child(n+4) {
-    margin-top: 40px;
-  }
-`;
-
-const TopButton = styled.button`
-  width: 8rem;
-  height: 8rem;
-  background-color: #EAEAEA;
-  border-radius: 40px;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-`;
-
-const GoUpImg = styled.img`
-  width: 20px;
-`;
+const optionModalRoot = document.getElementById('addbook-modal');
 
 const Home = () => {
-
+  const [isOpen, setIsOpen] = useState(false);
   // const token = useToken();
   // if (token === null) {
   //   return <Redirect to="/signin" />;
   // }
 
+  // useEffect(() => {
+  //   const $root = document.querySelector('#root');
+  //   if (isOpen) {
+  //     $root.style.position = 'fixed';
+  //   } else {
+  //     $root.style.position = 'relative';
+  //   }
+  // }, [isOpen]);
+
+  const renderPopup = () => {
+    const closePopup = () => {
+      setIsOpen(false);
+    };
+
+    return (
+      <>
+        <S.PopupLayout isOpen={isOpen}>
+          <AddBookPopup isOpen={isOpen} setIsOpen={setIsOpen}/>
+        </S.PopupLayout>
+        <S.Overlay isOpen={isOpen} setIsOpen={setIsOpen} onClick={closePopup}/>
+      </>
+    )
+  };
+
+  const openPopup = () => {
+    setIsOpen(true);
+  };
+
+  const goScrollTop = () => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    <Layout>
-      <S.Header>
-        <S.Title>Review Service<br />For Books</S.Title>
-        <HomeNav>
-          <SigninInfoBox>
-            <SiginInfo>unchd26@gmail.com</SiginInfo>
-            <SignoutButton>로그아웃</SignoutButton>
-          </SigninInfoBox>
-          <AddButton><PlusIcon src="/images/plus.png" alt="책 추가하기"/></AddButton>
-        </HomeNav>
-      </S.Header>
-      <BookListMain>
-        <BookListUl>
-          <BookInfo> 안녕하세요. </BookInfo>
-          <BookInfo> 안녕하세요. </BookInfo>
-          <BookInfo> 안녕하세요. </BookInfo>
-          <BookInfo> 안녕하세요. </BookInfo>
-          <BookInfo> 안녕하세요. </BookInfo>
-          <BookInfo> 안녕하세요. </BookInfo>
-          <BookInfo> 안녕하세요. </BookInfo>
-        </BookListUl>
-        <TopButton><GoUpImg src="/images/uparrow.png" alt="최상단으로 스크롤"/></TopButton>
-      </BookListMain>
-    </Layout>
+    <>
+      {ReactDOM.createPortal(renderPopup(), optionModalRoot)}
+      <Layout>
+        <S.Header>
+          <S.Title>Review Service <br />For Books</S.Title>
+          <S.HomeNav>
+            <S.SigninInfoBox>
+              <S.SiginInfo>unchd26@gmail.com</S.SiginInfo>
+              <S.SignoutButton>로그아웃</S.SignoutButton>
+            </S.SigninInfoBox>
+            <S.AddButton onClick={openPopup}><S.PlusIcon src="/images/plus.png" alt="책 추가하기"/></S.AddButton>
+          </S.HomeNav>
+        </S.Header>
+        <S.BookListMain>
+          <S.A11yMainTItle>책 목록</S.A11yMainTItle>
+          <S.BookListUl>
+            <S.BookInfo>
+              <S.BookNumber>123</S.BookNumber>
+              <S.BookTitle>백의 그림자</S.BookTitle>
+              <S.BookAuthor>황정은</S.BookAuthor>
+              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
+            </S.BookInfo>
+            <S.BookInfo>
+              <S.BookNumber>124</S.BookNumber>
+              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
+              <S.BookAuthor>김초엽</S.BookAuthor>
+              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
+            </S.BookInfo>
+            <S.BookInfo>
+              <S.BookNumber>124</S.BookNumber>
+              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
+              <S.BookAuthor>김초엽</S.BookAuthor>
+              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
+            </S.BookInfo>
+            <S.BookInfo>
+              <S.BookNumber>124</S.BookNumber>
+              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
+              <S.BookAuthor>김초엽</S.BookAuthor>
+              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
+            </S.BookInfo>
+            <S.BookInfo>
+              <S.BookNumber>124</S.BookNumber>
+              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
+              <S.BookAuthor>김초엽</S.BookAuthor>
+              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
+            </S.BookInfo>
+            <S.BookInfo>
+              <S.BookNumber>124</S.BookNumber>
+              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
+              <S.BookAuthor>김초엽</S.BookAuthor>
+              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
+            </S.BookInfo>
+            <S.BookInfo>
+              <S.BookNumber>124</S.BookNumber>
+              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
+              <S.BookAuthor>김초엽</S.BookAuthor>
+              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
+            </S.BookInfo>
+          </S.BookListUl>
+          <S.TopButton onClick={goScrollTop}><S.GoUpImg src="/images/uparrow.png" alt="최상단으로 스크롤"/></S.TopButton>
+        </S.BookListMain>
+      </Layout>
+    </>
   );
 };
 
