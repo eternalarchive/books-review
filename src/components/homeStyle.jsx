@@ -1,16 +1,5 @@
 import styled from 'styled-components';
 
-export const PopupLayout = styled.div`
-  display: ${props => props.isOpen ? 'flex' : 'none'};
-  justify-content: center;
-  align-content: center;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-`;
-
 export const Header = styled.header`
   padding: 20px 0;
   position: relative;
@@ -89,39 +78,45 @@ export const A11yMainTItle = styled.h2`
 `;
 
 export const BookListUl = styled.ul`
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  margin-left: -30px;
+  overflow: hidden;
 `;
 
 export const BookInfo = styled.li`
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
+  float: left;
+  padding: 20px;
+  margin-left: 42px;
+  margin-bottom: 30px;
   background-color: #002D93;
   width: 25rem;
   height: 19rem;
   color: #fff;
   position: relative;
+  word-break: keep-all;
   :hover {
     background-color: #60B198;
   }
-  :nth-child(n+4) {
-    margin-top: 40px;
+  ::after {
+    content: "";
+    display: block;
+    clear: both;
   }
 `;
 
 export const BookNumber = styled.p`
   font-weight: 400;
-`;
+  `;
 
 export const BookTitle = styled.p`
   font-size: 2.0rem;
+  margin-top: 15px;
 `;
 
 export const BookAuthor = styled.p`
   font-size: 1.8rem;
   font-weight: 400;
+  position: absolute;
+  bottom: 20px;
 `;
 
 export const BookDeleteButton = styled.button`

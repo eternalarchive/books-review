@@ -31,9 +31,7 @@ const Home = () => {
 
     return (
       <>
-        <S.PopupLayout isOpen={isOpen}>
-          <AddBookPopup isOpen={isOpen} setIsOpen={setIsOpen}/>
-        </S.PopupLayout>
+        <AddBookPopup isOpen={isOpen} setIsOpen={setIsOpen}/>
         <S.Overlay isOpen={isOpen} setIsOpen={setIsOpen} onClick={closePopup}/>
       </>
     )
@@ -92,7 +90,7 @@ const Home = () => {
               <S.BookAuthor>김초엽</S.BookAuthor>
               <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
             </S.BookInfo>
-            <S.BookInfo>
+            {/* <S.BookInfo>
               <S.BookNumber>124</S.BookNumber>
               <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
               <S.BookAuthor>김초엽</S.BookAuthor>
@@ -109,7 +107,7 @@ const Home = () => {
               <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
               <S.BookAuthor>김초엽</S.BookAuthor>
               <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
-            </S.BookInfo>
+            </S.BookInfo> */}
           </S.BookListUl>
           <S.TopButton onClick={goScrollTop}><S.GoUpImg src="/images/uparrow.png" alt="최상단으로 스크롤"/></S.TopButton>
         </S.BookListMain>
