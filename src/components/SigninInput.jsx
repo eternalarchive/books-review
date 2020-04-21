@@ -20,13 +20,19 @@ const SytledLabelText = styled.p`
   line-height: 2.0;
 `;
 
-const SigninInput = ({ info }) => {
+const SigninInput = ({ info, refName }) => {
   return (
     <label htmlFor={info}>
       <SytledLabelText>
         {info.toUpperCase()}
       </SytledLabelText>
-      <StyledInput id={info} type={info} placeholder={`${info.toUpperCase()}를 입력해주세요`} required/>
+      <StyledInput
+        id={info}
+        type={info}
+        ref={refName}
+        placeholder={`${info.toUpperCase()}를 입력해주세요`}
+        autoFocus={info === 'email' ? true : false}
+        required/>
     </label>
   );
 };

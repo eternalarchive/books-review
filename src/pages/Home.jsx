@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import ReactDOM from 'react-dom';
+import { Redirect } from 'react-router-dom';
 import Layout from '../components/Layout';
-import AddBookPopup from '../components/AddBookPopup';
+import AddBookPopupContainer from '../containers/AddBookPopupContainer';
+import BooksContainer from '../containers/BooksContainer';
+import useToken from '../hooks/useToken';
 import * as S from '../components/homeStyle';
-// import { Redirect } from 'react-router-dom';
-// import useToken from '../hooks/useToken';
+import { startLogoutSaga } from '../redux/modules/auth';
 
 const optionModalRoot = document.getElementById('addbook-modal');
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const token = useToken();
-  // if (token === null) {
-  //   return <Redirect to="/signin" />;
-  // }
+  const dispatch = useDispatch();
+  const token = useToken();
+
+  if (token === null) {
+    return <Redirect to="/signin" />;
+  }
 
   // useEffect(() => {
   //   const $root = document.querySelector('#root');
@@ -31,7 +36,7 @@ const Home = () => {
 
     return (
       <>
-        <AddBookPopup isOpen={isOpen} setIsOpen={setIsOpen}/>
+        <AddBookPopupContainer isOpen={isOpen} setIsOpen={setIsOpen}/>
         <S.Overlay isOpen={isOpen} setIsOpen={setIsOpen} onClick={closePopup}/>
       </>
     )
@@ -39,6 +44,10 @@ const Home = () => {
 
   const openPopup = () => {
     setIsOpen(true);
+  };
+
+  const signoutClick = () => {
+    dispatch(startLogoutSaga());
   };
 
   const goScrollTop = () => {
@@ -58,57 +67,14 @@ const Home = () => {
           <S.HomeNav>
             <S.SigninInfoBox>
               <S.SiginInfo>unchd26@gmail.com</S.SiginInfo>
-              <S.SignoutButton>로그아웃</S.SignoutButton>
+              <S.SignoutButton onClick={signoutClick}>로그아웃</S.SignoutButton>
             </S.SigninInfoBox>
             <S.AddButton onClick={openPopup}><S.PlusIcon src="/images/plus.png" alt="책 추가하기"/></S.AddButton>
           </S.HomeNav>
         </S.Header>
         <S.BookListMain>
           <S.A11yMainTItle>책 목록</S.A11yMainTItle>
-          <S.BookListUl>
-            <S.BookInfo>
-              <S.BookNumber>123</S.BookNumber>
-              <S.BookTitle>백의 그림자</S.BookTitle>
-              <S.BookAuthor>황정은</S.BookAuthor>
-              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
-            </S.BookInfo>
-            <S.BookInfo>
-              <S.BookNumber>124</S.BookNumber>
-              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
-              <S.BookAuthor>김초엽</S.BookAuthor>
-              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
-            </S.BookInfo>
-            <S.BookInfo>
-              <S.BookNumber>124</S.BookNumber>
-              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
-              <S.BookAuthor>김초엽</S.BookAuthor>
-              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
-            </S.BookInfo>
-            <S.BookInfo>
-              <S.BookNumber>124</S.BookNumber>
-              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
-              <S.BookAuthor>김초엽</S.BookAuthor>
-              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
-            </S.BookInfo>
-            {/* <S.BookInfo>
-              <S.BookNumber>124</S.BookNumber>
-              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
-              <S.BookAuthor>김초엽</S.BookAuthor>
-              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
-            </S.BookInfo>
-            <S.BookInfo>
-              <S.BookNumber>124</S.BookNumber>
-              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
-              <S.BookAuthor>김초엽</S.BookAuthor>
-              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
-            </S.BookInfo>
-            <S.BookInfo>
-              <S.BookNumber>124</S.BookNumber>
-              <S.BookTitle>우리가 빛의 속도로 갈 수 없다면</S.BookTitle>
-              <S.BookAuthor>김초엽</S.BookAuthor>
-              <S.BookDeleteButton><S.DeleteImg src="/images/plus-white.png" alt="책 지우기" /></S.BookDeleteButton>
-            </S.BookInfo> */}
-          </S.BookListUl>
+          <BooksContainer />
           <S.TopButton onClick={goScrollTop}><S.GoUpImg src="/images/uparrow.png" alt="최상단으로 스크롤"/></S.TopButton>
         </S.BookListMain>
       </Layout>

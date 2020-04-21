@@ -1,8 +1,8 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import SigininInput from '../components/SigninInput';
-import Button from '../components/Button';
+import SigninFormContainer from '../containers/SigninFormContainer';
 import * as S from '../components/signinStyle';
+import withAuth from '../hocs/withAuth';
 
 const SignIn = () => {
 
@@ -15,19 +15,10 @@ const SignIn = () => {
       </S.Header>
       <S.SignInArea>
         <S.NotiText>LOG IN.<br />START SEARCHING</S.NotiText>
-        <S.SiginInForm>
-          <S.InputBox>
-            <SigininInput info="email" />
-            <SigininInput info="password" />
-          </S.InputBox>
-          <S.ButtonBox>
-            <Button colorType="white">SIGN UP</Button>
-            <Button colorType="white">SIGN IN</Button>
-          </S.ButtonBox>
-        </S.SiginInForm>
+        <SigninFormContainer />
       </S.SignInArea>
     </Layout>
   );
 };
 
-export default SignIn;
+export default withAuth(SignIn, false);

@@ -40,7 +40,6 @@ tbody, td,textarea, tfoot, th, thead, time, title, tr, u, ul, video {
 	text-decoration: inherit;
 	color: inherit;
 	vertical-align: top;
-	outline: none;
 }
 
 html {
