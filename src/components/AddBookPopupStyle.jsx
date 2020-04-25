@@ -22,7 +22,7 @@ export const PopupBox = styled.section`
   }
 `;
 
-export const PopupTitle = styled.h1`
+export const PopupTitle = styled.h2`
   font-size: 3.2rem;
   line-height: 1.5;
 `;

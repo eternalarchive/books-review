@@ -107,7 +107,7 @@ export const BookNumber = styled.p`
   font-weight: 400;
   `;
 
-export const BookTitle = styled.p`
+export const BookTitle = styled.h3`
   font-size: 2.0rem;
   margin-top: 15px;
 `;
