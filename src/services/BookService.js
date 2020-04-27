@@ -26,4 +26,12 @@ export default class BookService {
       },
     });
   }
+
+  static async editBook(token, bookId, book) {
+    return axios.patch(`${BOOK_API_URL}/${bookId}`, book, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
 }

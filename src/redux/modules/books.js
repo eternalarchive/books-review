@@ -19,6 +19,7 @@ const { success, pending, fail } = createActions(
 export const startBooksSaga = createAction('START_BOOKS_SAGA');
 export const addBookSaga = createAction('ADD_BOOK_SAGA');
 export const deleteBookSaga = createAction('DELETE_BOOK_SAGA');
+export const editBookSaga = createAction('EDIT_BOOK_SAGA');
 
 function* getBooksSaga() {
   const token = yield select(state => state.auth.token);
@@ -53,7 +54,22 @@ function* plusBookSaga({ payload }) {
   try {
     yield put(pending());
     const res = yield call(BookService.addBook, token, payload);
+    console.log(res.data);
     yield put(success([...books, res.data]));
+  } catch (error) {
+    yield put(fail(error));
+  }
+}
+
+function* changeBookSaga({ payload }) {
+  const token = yield select(state => state.auth.token);
+  const books = yield select(state => state.books.books);
+
+  try {
+    yield put(pending());
+    const res = yield call(BookService.editBook, token, payload.bookId, payload.book);
+    console.log(res.data);
+    // yield put(success(books));
   } catch (error) {
     yield put(fail(error));
   }
@@ -63,6 +79,7 @@ export function* booksSaga() {
   yield takeLeading('START_BOOKS_SAGA', getBooksSaga);
   yield takeLeading('DELETE_BOOK_SAGA', clearBookSaga);
   yield takeLeading('ADD_BOOK_SAGA', plusBookSaga);
+  yield takeLeading('EDIT_BOOK_SAGA', changeBookSaga);
 }
 
 // 초기값

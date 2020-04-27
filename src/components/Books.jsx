@@ -5,13 +5,15 @@ const Books = ({
   books,
   getBooks,
   deleteBook,
-  addBook,
+  editBook,
   error,
   loading,
 }) => {
+
   useEffect(() => {
     getBooks();
   }, [getBooks]);
+
   useEffect(() => {
     console.log(books);
   }, [books]);
@@ -19,6 +21,12 @@ const Books = ({
   const clearBook = id => {
     deleteBook(id);
   };
+
+  // const changeBook = (key, value, id) => {
+  //   if(key === 'Enter') {
+  //     editBook(id, title, author);
+  //   }
+  // };
 
   return (
     <S.BookListUl>

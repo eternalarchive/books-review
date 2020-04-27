@@ -120,6 +120,9 @@ export const BookAuthor = styled.p`
 `;
 
 export const BookDeleteButton = styled.button`
+  position: absolute;
+  top: 15px;
+  right: 15px;
   border: 0;
   background: transparent;
 `;
@@ -127,9 +130,6 @@ export const BookDeleteButton = styled.button`
 export const DeleteImg = styled.img`
   width: 20px;
   transform: rotate(45deg);
-  position: absolute;
-  top: 15px;
-  right: 15px;
 `;
 
 export const TopButton = styled.button`

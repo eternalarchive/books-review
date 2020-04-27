@@ -53,3 +53,10 @@ export const ButtonBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const GoHome = styled.p`
+  font-size: 3.2rem;
+  font-weight: 400;
+  text-align: center;
+  margin: 50px 0;
+`;

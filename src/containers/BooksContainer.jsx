@@ -4,7 +4,7 @@ import Books from '../components/Books';
 import {
   startBooksSaga,
   deleteBookSaga,
-  addBookSaga,
+  editBookSaga,
 } from '../redux/modules/books';
 
 const BooksContainer = props => {
@@ -24,9 +24,10 @@ const BooksContainer = props => {
     [dispatch],
   );
 
-  const addBook = useCallback(
-    (author, title) => {
-      dispatch(addBookSaga({ author, title }));
+  const editBook = useCallback(
+    (bookId, title, author) => {
+      console.log({ bookId, book: { title, author } });
+      dispatch(editBookSaga({ bookId, book: { title, author } }));
     },
     [dispatch],
   );
@@ -39,7 +40,7 @@ const BooksContainer = props => {
       error={error}
       getBooks={getBooks}
       deleteBook={deleteBook}
-      addBook={addBook}
+      editBook={editBook}
     />
   );
 };
