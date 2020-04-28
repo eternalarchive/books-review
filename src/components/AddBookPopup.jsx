@@ -7,10 +7,14 @@ const AddBookPopup = ({ isOpen, setIsOpen, loading, error, addBook }) => {
   const titleRef = React.createRef();
 
   const plusBook = () => {
-    const author = authorRef.current.value;
-    const title = titleRef.current.value;
-    console.log(author, title);
-    addBook(author, title);
+    const author = authorRef.current.value.trim();
+    const title = titleRef.current.value.trim();
+    if (author !== '' && title !== '') {
+      console.log(author, title);
+      addBook(author, title);
+      authorRef.current.value = '';
+      titleRef.current.value = '';
+    }
   };
 
   const closePopup = () => {
