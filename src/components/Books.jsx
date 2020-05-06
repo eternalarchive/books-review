@@ -22,12 +22,6 @@ const Books = ({
     deleteBook(id);
   };
 
-  // const changeBook = (key, value, id) => {
-  //   if(key === 'Enter') {
-  //     editBook(id, title, author);
-  //   }
-  // };
-
   return (
     <S.BookListUl>
       {books.map(book => {

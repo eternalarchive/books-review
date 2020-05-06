@@ -15,7 +15,7 @@ export const Overlay = styled.div`
   display: ${props => props.isOpen ? 'block' : 'none'};
   background-color: #000;
   opacity: 0.6;
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
   bottom: 0;

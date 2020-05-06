@@ -15,19 +15,21 @@ const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const token = useToken();
+  const userID = useSelector(state => state.auth.userId);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.cssText = `position: fixed; top: -${window.scrollY}px`;
+    } else {
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = `position: ""; top: "";`
+      window.scrollTo(0, parseInt(scrollY || '0') * -1);
+    }
+  }, [isOpen]);
 
   if (token === null) {
     return <Redirect to="/signin" />;
   }
-
-  // useEffect(() => {
-  //   const $root = document.querySelector('#root');
-  //   if (isOpen) {
-  //     $root.style.position = 'fixed';
-  //   } else {
-  //     $root.style.position = 'relative';
-  //   }
-  // }, [isOpen]);
 
   const renderPopup = () => {
     const closePopup = () => {
@@ -66,7 +68,7 @@ const Home = () => {
           <S.Title>Review Service <br />For Books</S.Title>
           <S.HomeNav>
             <S.SigninInfoBox>
-              <S.SiginInfo>unchd26@gmail.com</S.SiginInfo>
+              <S.SiginInfo>{userID}</S.SiginInfo>
               <S.SignoutButton onClick={signoutClick}>로그아웃</S.SignoutButton>
             </S.SigninInfoBox>
             <S.AddButton onClick={openPopup}><S.PlusIcon src="/images/plus.png" alt="책 추가하기"/></S.AddButton>

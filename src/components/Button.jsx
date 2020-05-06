@@ -32,7 +32,7 @@ const StyledArrow = styled.span`
   background-position-x: ${props => (props.colorType === 'white' ? '100%' : '0%')};
 `;
 
-const Button = ({ colorType = 'white', children, onClick }) => {
+const Button = ({ colorType, children, onClick }) => {
   return (
     <StyledButton colorType={colorType} onClick={onClick}>
       <span>{children}</span>
@@ -40,5 +40,9 @@ const Button = ({ colorType = 'white', children, onClick }) => {
     </StyledButton>
   );
 };
+
+Button.defaultProps = {
+  colorType: 'white',
+}
 
 export default Button;
