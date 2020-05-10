@@ -43,6 +43,7 @@ export const SiginInForm = styled.section`
 
 export const InputBox = styled.div`
   height: 24rem;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -59,4 +60,11 @@ export const GoHome = styled.p`
   font-weight: 400;
   text-align: center;
   margin: 50px 0;
+`;
+
+export const ErrorMessage = styled.p`
+  position: absolute;
+  bottom: -38px;
+  font-weight: 400;
+  color: red;
 `;

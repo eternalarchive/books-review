@@ -10,7 +10,7 @@ const options = {
 
 const { success, pending, fail } = createActions(
   {
-    SUCCESS: token => ({ token }),
+    SUCCESS: loginInfo => ({ loginInfo }),
   },
   'PENDING',
   'FAIL',
@@ -21,12 +21,13 @@ export const startLoginSaga = createAction('START_LOGIN');
 export const startLogoutSaga = createAction('START_LOGOUT');
 
 function* loginSaga({ payload }) {
+  const userId = payload.email;
   try {
     yield put(pending());
     const res = yield call(LoginService.login, payload.email, payload.password);
     const { token } = res.data;
     localStorage.setItem('token', token);
-    yield put(success(token));
+    yield put(success({ token, userId }));
     yield put(push('/'));
   } catch (error) {
     console.log(error);
@@ -40,7 +41,10 @@ function* logoutSaga() {
     yield put(pending());
     yield call(LoginService.logout, token);
     localStorage.removeItem('token');
-    yield put(success(null));
+    yield put(success({
+      token: null,
+      userId: null,
+    }));
     yield put(push('/signin'));
   } catch (error) {
     console.log(error);
@@ -56,20 +60,26 @@ export function* userSaga() {
 
 const initialState = {
   token: null,
+  userId: null,
   loading: false,
   error: null,
 };
 
 const auth = handleActions(
   {
-    PENDING: (state, action) => ({ token: null, loading: true, error: null }),
+    PENDING: (state, action) => ({
+      ...state,
+      loading: true,
+      error: null,
+    }),
     SUCCESS: (state, action) => ({
-      token: action.payload.token,
+      ...state,
+      ...action.payload.loginInfo,
       loading: false,
       error: null,
     }),
     FAIL: (state, action) => ({
-      token: null,
+      ...state,
       loading: false,
       error: action.payload,
     }),
