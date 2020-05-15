@@ -2,9 +2,17 @@ import React from 'react';
 import Button from './Button';
 import * as S from './AddBookPopupStyle';
 
-const AddBookPopup = ({ isOpen, setIsOpen, loading, error, addBook }) => {
-  const authorRef = React.createRef();
-  const titleRef = React.createRef();
+interface AddBookPopupProps {
+  isOpen: Boolean;
+  setIsOpen: ;
+  loading: Boolean;
+  error: ;
+  addBook: ;
+}
+
+const AddBookPopup = ({ isOpen, setIsOpen, loading, error, addBook }: AddBookPopupProps) => {
+  const authorRef = React.createRef<HTMLInputElement>();
+  const titleRef = React.createRef<HTMLInputElement>();
 
   const plusBook = () => {
     const author = authorRef.current.value.trim();

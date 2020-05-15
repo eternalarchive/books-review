@@ -1,7 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.button`
+interface StyledButtonProps {
+  colorType: string;
+}
+
+interface ButtonProps {
+  colorType: string;
+  children?: React.ReactNode;
+  onClick: () => void;
+};
+
+const StyledButton = styled.button<StyledButtonProps>`
   width: 200px;
   display: flex;
   justify-content: space-between;
@@ -22,7 +32,7 @@ const StyledButton = styled.button`
   }
 `;
 
-const StyledArrow = styled.span`
+const StyledArrow = styled.span<StyledButtonProps>`
   display: inline-block;
   width: 20px;
   height: 10px;
@@ -32,7 +42,7 @@ const StyledArrow = styled.span`
   background-position-x: ${props => (props.colorType === 'white' ? '100%' : '0%')};
 `;
 
-const Button = ({ colorType = 'white', children, onClick }) => {
+const Button = ({ colorType, children, onClick }: ButtonProps) => {
   return (
     <StyledButton colorType={colorType} onClick={onClick}>
       <span>{children}</span>
@@ -40,5 +50,9 @@ const Button = ({ colorType = 'white', children, onClick }) => {
     </StyledButton>
   );
 };
+
+Button.defaultProps = {
+  colorType: 'white',
+}
 
 export default Button;
