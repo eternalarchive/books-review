@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
+type TisOpen = {
+  isOpen: boolean;
+};
+
 export const PopupLayout = styled.div`
-  display: ${props => props.isOpen ? 'flex' : 'none'};
+  display: ${({ isOpen }: TisOpen) => isOpen ? 'flex' : 'none'};
   justify-content: center;
   align-items: center;
   position: absolute;

@@ -3,7 +3,7 @@ import books from './books';
 import auth from './auth';
 import { connectRouter } from 'connected-react-router';
 
-const reducer = history =>
+const reducer = (history: any) =>
   combineReducers({
     books,
     auth,
@@ -11,3 +11,5 @@ const reducer = history =>
   });
 
 export default reducer;
+
+export type RootState = ReturnType<typeof reducer>;

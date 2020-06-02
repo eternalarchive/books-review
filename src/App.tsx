@@ -5,11 +5,11 @@ import SignIn from './pages/SignIn';
 import NotFound from './pages/NotFound';
 import ErrorBoundary from 'react-error-boundary';
 
-const ErrorFallbackComponent = ({ error }) => <div>{error.message}</div>;
+// const ErrorFallbackComponent = ({ error }) => <div>{error.message}</div>;
 
 function App() {
   return (
-    <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
+    // <ErrorBoundary FallbackComponent={ErrorFallbackComponent}>
       <BrowserRouter>
         <Switch>
           <Route exact path="/signin" component={SignIn} />
@@ -17,7 +17,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </BrowserRouter>
-    </ErrorBoundary>
+    // </ErrorBoundary>
   );
 }
 

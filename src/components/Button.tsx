@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface StyledButtonProps {
+type StyledButtonProps = {
   colorType: string;
 }
 
-interface ButtonProps {
+type ButtonProps = {
   colorType: string;
   children?: React.ReactNode;
   onClick: () => void;

@@ -1,12 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import SigininInput from './SigninInput';
 import Button from './Button';
 import * as S from './signinStyle';
 
-const SigninForm = ({ loading, login, error }) => {
+type SigninFormProps = {
+  loading: boolean;
+  login: (email: string, password: string) => {};
+  error: any;
+};
+
+const SigninForm = ({ loading, login, error }: SigninFormProps) => {
   const [errorNoti, setErrorNoti] = useState('');
-  const emailRef = React.createRef();
-  const passwordRef = React.createRef();
+  const emailRef: React.RefObject<HTMLInputElement> = createRef();
+  const passwordRef: React.RefObject<HTMLInputElement> = createRef();
 
   useEffect(() => {
     if (error === null) return;
@@ -20,6 +26,7 @@ const SigninForm = ({ loading, login, error }) => {
   }, [error]);
 
   async function signinClick() {
+    if(!emailRef.current || !passwordRef.current) return;
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     console.log('email:', email, 'password:', password);

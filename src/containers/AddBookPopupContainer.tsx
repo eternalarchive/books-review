@@ -4,14 +4,15 @@ import AddBookPopup from '../components/AddBookPopup';
 import {
   addBookSaga,
 } from '../redux/modules/books';
+import { RootState } from '../redux/modules/reducer';
 
-const AddBookPopupContainer = props => {
-  const loading = useSelector(state => state.books.loading);
-  const error = useSelector(state => state.books.error);
+function AddBookPopupContainer(props) {
+  const loading = useSelector((state: RootState) => state.books.loading);
+  const error = useSelector((state: RootState) => state.books.error);
   const dispatch = useDispatch();
 
   const addBook = useCallback(
-    (author, title) => {
+    (author: string, title: string) => {
       dispatch(addBookSaga({ author, title }));
     },
     [dispatch],

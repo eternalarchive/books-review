@@ -1,14 +1,22 @@
 import React, { useEffect } from 'react';
 import * as S from './homeStyle';
+import { Tbooks } from '../services/BookService';
+
+type BooksProps = {
+  books: Tbooks[];
+  getBooks: () => void;
+  deleteBook: (bookId: number) => void;
+  error: null | {};
+  loading: boolean;
+};
 
 const Books = ({
   books,
   getBooks,
   deleteBook,
-  editBook,
   error,
   loading,
-}) => {
+}: BooksProps) => {
 
   useEffect(() => {
     getBooks();
@@ -18,7 +26,7 @@ const Books = ({
     console.log(books);
   }, [books]);
 
-  const clearBook = id => {
+  const clearBook = (id: number) => {
     deleteBook(id);
   };
 

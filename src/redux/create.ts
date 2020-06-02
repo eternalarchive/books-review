@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
 import reducer from './modules/reducer';
-import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { createBrowserHistory } from 'history';
 import { routerMiddleware } from 'connected-react-router';
@@ -14,20 +13,8 @@ const create = () => {
   const token = localStorage.getItem('token');
   const store = createStore(
     reducer(history),
-    {
-      auth: {
-        token,
-        loading: false,
-        error: null,
-      },
-      books: {
-        books: [],
-        loading: false,
-        error: null,
-      },
-    },
     composeWithDevTools(
-      applyMiddleware(thunk, routerMiddleware(history), sagaMiddleware),
+      applyMiddleware(routerMiddleware(history), sagaMiddleware),
     ),
   );
 

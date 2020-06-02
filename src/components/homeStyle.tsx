@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+type TisOpen = {
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 export const Header = styled.header`
   padding: 20px 0;
   position: relative;
@@ -12,7 +17,7 @@ export const Title = styled.h1`
 `;
 
 export const Overlay = styled.div`
-  display: ${props => props.isOpen ? 'block' : 'none'};
+  display: ${({ isOpen, setIsOpen }: TisOpen) => isOpen ? 'block' : 'none'};
   background-color: #000;
   opacity: 0.6;
   position: fixed;

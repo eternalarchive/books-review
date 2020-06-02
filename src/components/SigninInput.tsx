@@ -1,6 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
+type SigninInputProps = {
+  info: string;
+  refName: any;
+};
+
 const StyledInput = styled.input`
   width: 100%;
   height: 7rem;
@@ -21,7 +26,7 @@ const SytledLabelText = styled.p`
   line-height: 2.0;
 `;
 
-const SigninInput = ({ info, refName }) => {
+function SigninInput ({ info, refName }: SigninInputProps) {
   return (
     <label htmlFor={info}>
       <SytledLabelText>
@@ -37,5 +42,9 @@ const SigninInput = ({ info, refName }) => {
     </label>
   );
 };
+
+SigninInput.defaultProps = {
+  info: 'email',
+}
 
 export default SigninInput;

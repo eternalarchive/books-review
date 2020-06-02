@@ -4,13 +4,13 @@ import Books from '../components/Books';
 import {
   startBooksSaga,
   deleteBookSaga,
-  editBookSaga,
 } from '../redux/modules/books';
+import { RootState } from '../redux/modules/reducer';
 
-const BooksContainer = props => {
-  const books = useSelector(state => state.books.books);
-  const loading = useSelector(state => state.books.loading);
-  const error = useSelector(state => state.books.error);
+function BooksContainer(props) {
+  const books = useSelector((state: RootState) => state.books.books);
+  const loading = useSelector((state: RootState) => state.books.loading);
+  const error = useSelector((state: RootState) => state.books.error);
   const dispatch = useDispatch();
 
   const getBooks = useCallback(() => {
@@ -18,16 +18,8 @@ const BooksContainer = props => {
   }, [dispatch]);
 
   const deleteBook = useCallback(
-    bookId => {
+   (bookId: number) => {
       dispatch(deleteBookSaga({ bookId }));
-    },
-    [dispatch],
-  );
-
-  const editBook = useCallback(
-    (bookId, title, author) => {
-      console.log({ bookId, book: { title, author } });
-      dispatch(editBookSaga({ bookId, book: { title, author } }));
     },
     [dispatch],
   );
@@ -40,7 +32,6 @@ const BooksContainer = props => {
       error={error}
       getBooks={getBooks}
       deleteBook={deleteBook}
-      editBook={editBook}
     />
   );
 };

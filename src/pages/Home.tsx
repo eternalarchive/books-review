@@ -8,6 +8,7 @@ import BooksContainer from '../containers/BooksContainer';
 import useToken from '../hooks/useToken';
 import * as S from '../components/homeStyle';
 import { startLogoutSaga } from '../redux/modules/auth';
+import { RootState } from '../redux/modules/reducer';
 
 const optionModalRoot = document.getElementById('addbook-modal');
 
@@ -15,7 +16,7 @@ const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const token = useToken();
-  const userID = useSelector(state => state.auth.userId);
+  const userID: number = useSelector((state: RootState) => state.auth.userId);
 
   useEffect(() => {
     if (isOpen) {

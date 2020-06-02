@@ -3,14 +3,14 @@ import axios from 'axios';
 const LOGIN_API_URL = 'https://api.marktube.tv/v1/me';
 
 export default class LoginService {
-  static async login(email, password) {
+  static async login(email: string, password: string) {
     return await axios.post(LOGIN_API_URL, {
       email,
       password,
     });
   }
 
-  static async logout(token) {
+  static async logout(token: string) {
     return axios.delete(LOGIN_API_URL, {
       headers: {
         Authorization: `Bearer ${token}`,

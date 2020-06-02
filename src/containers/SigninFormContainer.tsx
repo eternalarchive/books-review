@@ -2,14 +2,15 @@ import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import SigninForm from '../components/SigninForm';
 import { startLoginSaga } from '../redux/modules/auth';
+import { RootState } from '../redux/modules/reducer';
 
-const SigninFormContainer = props => {
-  const loading = useSelector(state => state.auth.loading);
-  const error = useSelector(state => state.auth.error);
+function SigninFormContainer(props) {
+  const loading = useSelector((state: RootState) => state.auth.loading);
+  const error = useSelector((state: RootState) => state.auth.error);
   const dispatch = useDispatch();
 
   const login = useCallback(
-    (email, password) => {
+    (email: string, password: string) => {
       dispatch(startLoginSaga({ email, password }));
     },
     [dispatch],

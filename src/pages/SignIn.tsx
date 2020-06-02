@@ -4,8 +4,7 @@ import SigninFormContainer from '../containers/SigninFormContainer';
 import * as S from '../components/signinStyle';
 import withAuth from '../hocs/withAuth';
 
-const SignIn = () => {
-
+function SignIn() {
   return (
     <Layout>
       <S.Header>
