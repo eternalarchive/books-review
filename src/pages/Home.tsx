@@ -10,9 +10,9 @@ import * as S from '../components/homeStyle';
 import { startLogoutSaga } from '../redux/modules/auth';
 import { RootState } from '../redux/modules/reducer';
 
-const optionModalRoot = document.getElementById('addbook-modal');
+const optionModalRoot = document.getElementById('addbook-modal') as HTMLElement;
 
-const Home = () => {
+function Home() {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const token = useToken();

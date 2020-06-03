@@ -11,7 +11,7 @@ const Wrapper = styled.div`
   padding: 20px 80px 0 80px;
 `;
 
-const Layout = ({ children }: LayoutProps) => {
+function Layout({ children }: LayoutProps) {
   return (
     <Wrapper>
       {children}

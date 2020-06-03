@@ -9,7 +9,7 @@ type SigninFormProps = {
   error: any;
 };
 
-const SigninForm = ({ loading, login, error }: SigninFormProps) => {
+function SigninForm({ loading, login, error }: SigninFormProps) {
   const [errorNoti, setErrorNoti] = useState('');
   const emailRef: React.RefObject<HTMLInputElement> = createRef();
   const passwordRef: React.RefObject<HTMLInputElement> = createRef();

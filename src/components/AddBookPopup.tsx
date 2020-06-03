@@ -10,7 +10,7 @@ type AddBookPopupProps = {
   addBook: (author: string, title: string) => void;
 }
 
-const AddBookPopup = ({ isOpen, setIsOpen, loading, error, addBook }: AddBookPopupProps) => {
+function AddBookPopup({ isOpen, setIsOpen, loading, error, addBook }: AddBookPopupProps) {
   const authorRef: React.RefObject<HTMLInputElement> = createRef();
   const titleRef: React.RefObject<HTMLInputElement> = createRef();
 

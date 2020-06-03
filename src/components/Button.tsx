@@ -42,7 +42,7 @@ const StyledArrow = styled.span<StyledButtonProps>`
   background-position-x: ${props => (props.colorType === 'white' ? '100%' : '0%')};
 `;
 
-const Button = ({ colorType, children, onClick }: ButtonProps) => {
+function Button({ colorType, children, onClick }: ButtonProps) {
   return (
     <StyledButton colorType={colorType} onClick={onClick}>
       <span>{children}</span>

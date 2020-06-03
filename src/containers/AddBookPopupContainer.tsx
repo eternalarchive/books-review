@@ -6,9 +6,9 @@ import {
 } from '../redux/modules/books';
 import { RootState } from '../redux/modules/reducer';
 
-function AddBookPopupContainer(props) {
-  const loading = useSelector((state: RootState) => state.books.loading);
-  const error = useSelector((state: RootState) => state.books.error);
+function AddBookPopupContainer(props: any) {
+  const loading: boolean = useSelector((state: RootState) => state.books.loading);
+  const error: null | {} = useSelector((state: RootState) => state.books.error);
   const dispatch = useDispatch();
 
   const addBook = useCallback(

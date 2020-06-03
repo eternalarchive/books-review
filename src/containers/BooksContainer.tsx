@@ -6,11 +6,12 @@ import {
   deleteBookSaga,
 } from '../redux/modules/books';
 import { RootState } from '../redux/modules/reducer';
+import { Tbooks } from '../services/BookService';
 
-function BooksContainer(props) {
-  const books = useSelector((state: RootState) => state.books.books);
-  const loading = useSelector((state: RootState) => state.books.loading);
-  const error = useSelector((state: RootState) => state.books.error);
+function BooksContainer(props: any) {
+  const books: Tbooks[] = useSelector((state: RootState) => state.books.books);
+  const loading: boolean = useSelector((state: RootState) => state.books.loading);
+  const error: {} | null = useSelector((state: RootState) => state.books.error);
   const dispatch = useDispatch();
 
   const getBooks = useCallback(() => {

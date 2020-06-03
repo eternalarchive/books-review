@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Layout from "../components/Layout";
 import * as S from '../components/signinStyle';
 
-const NotFound = () => {
+function NotFound() {
   return (
     <Layout>
       <S.Header>

@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
+import { History } from 'history';
 import books from './books';
 import auth from './auth';
 import { connectRouter } from 'connected-react-router';
 
-const reducer = (history: any) =>
+const reducer: any = (history: History) =>
   combineReducers({
     books,
     auth,

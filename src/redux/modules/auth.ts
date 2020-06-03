@@ -1,10 +1,10 @@
 import LoginService from '../../services/LoginService';
 import { push } from 'connected-react-router';
 import { put, call, select, takeLeading } from 'redux-saga/effects';
-import { createAsyncAction, createAction, createReducer } from 'typesafe-actions';
+import { createAsyncAction, createAction, createReducer, ActionType } from 'typesafe-actions';
 import { AxiosError } from 'axios';
 
-const prefix: string = 'reactjs-books-review/auth';
+const prefix: string = 'reactjs-books-review/auth/';
 
 const pending = `${prefix}PENDING`;
 const success = `${prefix}SUCCESS`;
@@ -12,7 +12,7 @@ const fail = `${prefix}FAIL`;
 
 export const actions = createAsyncAction(pending, success, fail)<
   string,
-  { token: null | string , userId: null | string },
+  any,
   AxiosError
 >();
 
@@ -22,7 +22,7 @@ export const startLogoutSaga = createAction('START_LOGOUT')();
 function* loginSaga({ payload }: ReturnType<typeof startLoginSaga>) {
   const userId = payload.email;
   try {
-    // yield put(actions.request());
+    yield put(actions.request(''));
     const res = yield call(LoginService.login, payload.email, payload.password);
     const { token } = res.data;
     localStorage.setItem('token', token);
@@ -37,7 +37,7 @@ function* loginSaga({ payload }: ReturnType<typeof startLoginSaga>) {
 function* logoutSaga() {
   const token = yield select(state => state.auth.token);
   try {
-    // yield put(actions.request());
+    yield put(actions.request(''));
     yield call(LoginService.logout, token);
     localStorage.removeItem('token');
     yield put(actions.success({
@@ -57,21 +57,23 @@ export function* userSaga() {
   yield takeLeading('START_LOGOUT', logoutSaga);
 }
 
-type TinitialState = {
+export type TAuthInitialState = {
   token: null | string;
-  userId: null | number;
+  userId: null | string;
   loading: boolean;
   error: null | {};
 };
 
-const initialState: TinitialState = {
+const initialState: TAuthInitialState = {
   token: null,
   userId: null,
   loading: false,
   error: null,
 };
 
-const auth = createReducer(initialState, {
+type AuthAction = ActionType<typeof actions>;
+
+const auth = createReducer<TAuthInitialState, AuthAction>(initialState, {
   [pending]: (state) => ({
     ...state,
     loading: true,
@@ -79,7 +81,8 @@ const auth = createReducer(initialState, {
   }),
   [success]: (state, action) => ({
     ...state,
-    ...action.payload.loginInfo,
+    token: action.payload.token,
+    userId: action.payload.userId,
     loading: false,
     error: null,
   }),

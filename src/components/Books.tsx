@@ -10,13 +10,13 @@ type BooksProps = {
   loading: boolean;
 };
 
-const Books = ({
+function Books({
   books,
   getBooks,
   deleteBook,
   error,
   loading,
-}: BooksProps) => {
+}: BooksProps) {
 
   useEffect(() => {
     getBooks();

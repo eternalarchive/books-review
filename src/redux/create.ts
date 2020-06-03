@@ -10,7 +10,6 @@ export const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
 
 const create = () => {
-  const token = localStorage.getItem('token');
   const store = createStore(
     reducer(history),
     composeWithDevTools(

@@ -4,9 +4,9 @@ import SigninForm from '../components/SigninForm';
 import { startLoginSaga } from '../redux/modules/auth';
 import { RootState } from '../redux/modules/reducer';
 
-function SigninFormContainer(props) {
-  const loading = useSelector((state: RootState) => state.auth.loading);
-  const error = useSelector((state: RootState) => state.auth.error);
+function SigninFormContainer(props: any) {
+  const loading: boolean = useSelector((state: RootState) => state.auth.loading);
+  const error: {} | null = useSelector((state: RootState) => state.auth.error);
   const dispatch = useDispatch();
 
   const login = useCallback(

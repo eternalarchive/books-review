@@ -14,6 +14,11 @@ export type Tbooks = {
   deletedAt: null;
 };
 
+type Tbook = {
+  author: string;
+  title: string;
+}
+
 export default class BookService {
   static async getBooks(token: string) {
     return axios.get<Tbooks[]>(BOOK_API_URL, {
@@ -23,7 +28,7 @@ export default class BookService {
     });
   }
 
-  static async addBook(token: string, book) {
+  static async addBook(token: string, book: Tbook) {
     return axios.post<Tbooks>(BOOK_API_URL, book, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -39,7 +44,7 @@ export default class BookService {
     });
   }
 
-  static async editBook(token: string, bookId: number, book) {
+  static async editBook(token: string, bookId: number, book: Tbook) {
     return axios.patch<Tbooks>(`${BOOK_API_URL}/${bookId}`, book, {
       headers: {
         Authorization: `Bearer ${token}`,

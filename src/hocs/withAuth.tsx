@@ -3,8 +3,8 @@ import { Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/modules/reducer';
 
-function withAuth(Component, loggedin: boolean) {
-  function WrappedComponent(props) {
+function withAuth(Component: any, loggedin: boolean) {
+  function WrappedComponent(props: any) {
     const token = useSelector((state: RootState) => state.auth.token);
 
     if (loggedin) {
